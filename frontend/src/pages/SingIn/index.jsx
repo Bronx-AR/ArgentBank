@@ -1,45 +1,71 @@
-import React from "react";
-import Chat from "../../assets/icon-chat.png";
-import Money from "../../assets/icon-money.png";
-import Security from "../../assets/icon-security.png";
-import Features from "../../components/Features/Features";
+import React, { useState, useEffect, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchLogin } from "../../actions/user.actions";
+import { useNavigate } from "react-router-dom";
+import { selectLoginToken } from "../../selectors/user.selectors";
+import { fetchProfile } from "../../actions/profile.actions";
 
-const Home = () => {
+const Signin = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const token = useSelector(selectLoginToken);
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    dispatch(fetchLogin(email, password));
+  };
+
+  const handleProfile = useCallback(
+    (token) => {
+      dispatch(fetchProfile(token));
+    },
+    [dispatch]
+  );
+
+  useEffect(() => {
+    if (token) {
+      navigate("/profile");
+      handleProfile(token);
+    }
+  }, [token, navigate, handleProfile]);
+
   return (
-    <main>
-      <section className="hero">
-        <div className="hero-banner">
-          <article className="hero-content">
-            <h2>
-              No fees. <br />
-              No minimum deposit. <br />
-              High interest rates.
-            </h2>
-            <p>Open a savings account with Argent Bank today!</p>
-          </article>
-        </div>
-      </section>
-      <section className="services">
-        <Features
-          img={Chat}
-          title="You are our #1 priority"
-          desc="Need to talk to a representative? You can get in touch through our 24/7 chat or through a phone call in less than 5 minutes."
-        />
-        <Features
-          img={Money}
-          title="More savings means higher rates"
-          desc="The more you save with us, the higher your interest rate will be!"
-        />
-        <Features
-          img={Security}
-          title="Security you can trust"
-          desc="We use top of the line encryption to make sure your data and money is always safe."
-        />
+    <main className="main-signin">
+      <section className="signin">
+        <form className="signin-form" onSubmit={handleLogin}>
+          <div className="form-header">
+            <i className="fa-solid fa-circle-user"></i>
+            <h2>Sign In</h2>
+          </div>
+
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+
+          <div className="saveLogins-container">
+            <label htmlFor="savelogins">Remember me</label>
+            <input type="checkbox" id="savelogins" />
+          </div>
+
+          <button type="submit" className="signin-button">
+            Sign In
+          </button>
+        </form>
       </section>
     </main>
   );
 };
 
-export default Home;
-// src={HeroImg}
-// alt="Arbre avec un pot d'argent"
+export default Signin;

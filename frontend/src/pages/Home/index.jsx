@@ -1,7 +1,7 @@
 import React from "react";
-import Chat from "../../assets/icon-chat.png";
-import Money from "../../assets/icon-money.png";
-import Security from "../../assets/icon-security.png";
+import Chat from "../../assets/Icon chat.webp";
+import Money from "../../assets/Argent Bank money icon.webp";
+import Security from "../../assets/Icon security.webp";
 import Features from "../../components/Features/Features";
 
 const Home = () => {
@@ -9,7 +9,7 @@ const Home = () => {
     <main>
       <section className="hero">
         <div className="hero-banner">
-          <article className="hero-content">
+          <article className="hero-content"> 
             <h2>
               No fees. <br />
               No minimum deposit. <br />

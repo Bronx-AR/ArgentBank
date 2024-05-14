@@ -50,7 +50,7 @@ const Signin = () => {
   return (
     <main className="main-signin">
       <section className="signin">
-      <form className="signin-form" onSubmit={handleSubmit}>
+        <form className="signin-form" onSubmit={handleSubmit}>
           <div className="form-header">
             <i className="fa-solid fa-circle-user"></i>
             <h2>Sign In</h2>
@@ -76,7 +76,7 @@ const Signin = () => {
           </div>
 
           <div className="error">
-          {isError ? "Email or Password Invalid." : null}
+            {isError ? "Email or Password Invalid." : null}
           </div>
 
           <button type="submit" className="signin-button">

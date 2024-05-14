@@ -1,83 +1,84 @@
 .hero {
-    overflow: hidden;
-    &-banner {
-      position: relative;
-      background-image: url("../../assets/bank-tree.jpeg");
-      background-position: 0% 33%;
-      background-size: cover;
-      background-repeat: no-repeat;
-      height: 400px;
-      .hero-content {
-        position: absolute;
-        top: 80px;
-        right: 80px;
-        background-color: #fff;
-        width: 365px;
-        height: 215px;
-        padding: 35px;
-        h2 {
-          margin-bottom: 22px;
-          font-size: 22px;
-          font-weight: 800;
-          letter-spacing: 1.5px;
-        }
-        p {
-          font-size: 20px;
-        }
+  overflow: hidden;
+  &-banner {
+    position: relative;
+    background-image: url("../../assets/bank-tree.webp");
+    background-position: 0% 33%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 400px;
+    .hero-content {
+      position: absolute;
+      top: 80px;
+      right: 80px;
+      background-color: #fff;
+      width: 365px;
+      height: 215px;
+      padding: 35px;
+      h2 {
+        margin-bottom: 22px;
+        font-size: 22px;
+        font-weight: 800;
+        letter-spacing: 1.5px;
       }
-    }
-  }
-  
-  .services {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 40px 45px;
-    height: 310px;
-    margin-bottom: 30px;
-    &-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 15px;
-      width: 33.33%;
-      .img-container {
-        border: 10px solid $primary;
-        border-radius: 50%;
-        padding: 15px;
-  
-        img {
-          width: 100px;
-        }
-      }
-      .services-title {
+      p {
         font-size: 20px;
       }
-      .services-subtitle {
-        text-align: center;
-      }
     }
   }
-  @media screen and (max-width: 678px) {
-    .hero-banner {
-      display: grid;
-      place-content: center;
-      padding: 0px 20px;
-      .hero-content {
-        position: static;
-        width: 100%;
+}
+
+.services {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 40px 45px;
+  height: 310px;
+  margin-bottom: 30px;
+  &-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+    width: 33.33%;
+    .img-container {
+      border: 10px solid $primary;
+      border-radius: 50%;
+      padding: 15px;
+
+      img {
+        width: 100px;
       }
     }
-  
-    .services {
-      height: 100%;
+    .services-title {
+      font-size: 20px;
+    }
+    .services-subtitle {
+      text-align: center;
+    }
+  }
+}
+
+@media screen and (max-width: 678px) {
+  .hero-banner {
+    display: grid;
+    place-content: center;
+    padding: 0px 20px;
+    .hero-content {
+      position: static;
       width: 100%;
-      flex-direction: column;
-      &-card {
-        text-align: center;
-        margin: 20px 0px;
-        width: 100%;
-      }
     }
   }
+
+  .services {
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    &-card {
+      text-align: center;
+      margin: 20px 0px;
+      width: 100%;
+    }
+  }
+}

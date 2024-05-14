@@ -22,6 +22,7 @@
             font-size: 12px;
         }
     }
+
     .balance-negative {
         color: red;
     }
@@ -75,28 +76,6 @@
                 width: 15%;
             }
         }
-        .edit-transac {
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
-            align-items: center;
-            gap: 5px;
-            i {
-                cursor: pointer;
-            }
-            .fa-xmark {
-                color: hsl(0, 86%, 43%);
-            }
-
-            .edit-input {
-                outline: none;
-                background: none;
-                border: none;
-                border-bottom: 1px solid #fff;
-                color: #fff;
-                font-size: 16px;
-            }
-        }
     }
     .transaction-info {
         position: relative;
@@ -113,6 +92,28 @@
         .item-info {
             p {
                 margin-bottom: 5px;
+            }
+            .edit-transac {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+                gap: 5px;
+                i {
+                    cursor: pointer;
+                }
+                .fa-xmark {
+                    color: hsl(0, 86%, 43%);
+                }
+
+                .edit-input {
+                    outline: none;
+                    background: none;
+                    border: none;
+                    border-bottom: 1px solid #fff;
+                    color: #fff;
+                    font-size: 16px;
+                }
             }
         }
 

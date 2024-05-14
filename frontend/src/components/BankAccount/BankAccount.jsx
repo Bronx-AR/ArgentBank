@@ -57,7 +57,7 @@ const BankAccount = ({ id, balance, accId }) => {
             )}
             <p className="account-subtitle">Available balance</p>
           </div>
-          <p className="chevron">{toggle ? "X" : ">"}</p>
+          <p className="chevron">{toggle ? "x" : ">"}</p>
         </article>
         {client ? null : (
           <div>
@@ -72,6 +72,7 @@ const BankAccount = ({ id, balance, accId }) => {
             </button>
           </div>
         )}
+
         <div className="transaction-container">
           <div className="transaction-header">
             <p>Date</p>
@@ -114,8 +115,10 @@ const BankAccount = ({ id, balance, accId }) => {
           )}
           <p className="account-subtitle">Available balance</p>
         </div>
-        <p className="chevron">{toggle ? "x" : ">"}</p>
+        <p className="chevron">{toggle ? "X" : ">"}</p>
       </article>
     </div>
   );
 };
+
+export default BankAccount;

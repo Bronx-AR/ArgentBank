@@ -24,7 +24,6 @@ const Client = () => {
   const { data: accounts, isLoading } = useAccountsQuery({ userId });
   dispatch(setAccounts(accounts));
   const allAccounts = useSelector(selectCurrentAccounts);
-
   const [modalToggle, setModalToggle] = useState(false);
 
   return (

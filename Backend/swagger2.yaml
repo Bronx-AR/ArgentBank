@@ -36,6 +36,8 @@ paths:
         - Bearer: []
       tags:
         - Bank (Client)
+        - Bank (Banker)
+        - Bank (Admin)
       summary: Get account transactions by Account Id
       description: Get account transactions by Account Id
       parameters:
@@ -95,6 +97,9 @@ paths:
           description : Unauthorized  
         '500':
           description: Internal Server Error
+          
+          
+          
   /panel/users:
     get:
       security:
@@ -115,7 +120,7 @@ paths:
           description: Clients not found
         '500':
           description: Internal Server Error
-
+          
   /panel/users/{userId}:
     get:
       security:
@@ -138,8 +143,11 @@ paths:
           description: Client retrieved successfully
         '400':
           description: Client Id required!
-        '500':
+        '404':
           description: No user found!
+        '500':
+          description: Error Server
+                  
           
   /panel/banker/addAccount:
     post: 
@@ -165,8 +173,8 @@ paths:
           description: All fields are required
         '500':
           description: Error creating account
-
-
+  
+  
   /panel/banker/addTransaction:
     post:
       security:
@@ -193,7 +201,7 @@ paths:
           description: No account found with this ID
         '500': 
           description: Error creating the transaction
-
+        
   /panel/admin/deleteAccount/{accountID}:
     delete:
       security:
@@ -216,8 +224,8 @@ paths:
           description: All fields are required
         '500':
           description: Error deleting the account
-
-
+ 
+          
   /panel/admin/deleteTransaction/{transactionID}:
     delete:
       security:
@@ -240,8 +248,8 @@ paths:
           description: All fields are required
         '500':
           description: Error deleting the transaction
-
-
+          
+          
   /panel/admin/upUser/{userID}:
     put:
       security:
@@ -269,8 +277,8 @@ paths:
           description: All fields are required
         '500':
           description: Error updating the Client
-
-
+          
+          
 securityDefinitions:
   Bearer:
     type: apiKey
@@ -366,7 +374,7 @@ definitions:
       lastname:
         type: string
       roles:
-        type: object 
+        type: object
   UpdateTransaction:
     properties:
       note: 

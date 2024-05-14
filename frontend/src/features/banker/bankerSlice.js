@@ -19,4 +19,5 @@ export const { setUsers, setClient } = bankerSlice.actions;
 
 export default bankerSlice.reducer;
 
+export const selectCurrentUsers = (state) => state.banker.users;
 export const selectCurrentClient = (state) => state.banker.clientInfo;

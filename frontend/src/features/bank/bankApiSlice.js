@@ -3,7 +3,7 @@ import { apiSlice } from "../../app/api/apiSlice";
 export const bankApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     accounts: builder.query({
-        query: (userId) => ({
+      query: (userId) => ({
         url: "/bank/accounts",
         method: "POST",
         body: userId,
@@ -20,17 +20,17 @@ export const bankApiSlice = apiSlice.injectEndpoints({
       ],
     }),
     editTransaction: builder.mutation({
-        query: ({ accId, transactionId, editedContent }) => ({
-          url: `/bank/accounts/${accId}/transactions/${transactionId}`,
-          method: "PUT",
-          body: { ...editedContent },
-        }),
+      query: ({ accId, transactionId, editedContent }) => ({
+        url: `/bank/accounts/${accId}/transactions/${transactionId}`,
+        method: "PUT",
+        body: { ...editedContent },
       }),
+    }),
   }),
 });
 
 export const {
-    useAccountsQuery,
-    useTransactionsQuery,
-    useEditTransactionMutation,
-  } = bankApiSlice;
+  useAccountsQuery,
+  useTransactionsQuery,
+  useEditTransactionMutation,
+} = bankApiSlice;

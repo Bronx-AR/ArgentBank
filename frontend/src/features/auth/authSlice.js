@@ -8,7 +8,7 @@ const authSlice = createSlice({
       const { data } = action.payload;
       if (data) {
         state.token = data.token;
-        state.roles = {};
+        state.roles = data.rolesArray;
       }
     },
     setNewToken: (state, action) => {
@@ -18,6 +18,7 @@ const authSlice = createSlice({
     },
     logOut: (state, action) => {
       state.token = null;
+      state.roles = {};
     },
   },
 });

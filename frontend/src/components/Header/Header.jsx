@@ -1,4 +1,4 @@
-import logo from "../../assets/argentBankLogo.png";
+import logo from "../../assets/Argent Bank Logo.webp";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -33,7 +33,7 @@ const Header = () => {
               </Link>
             ) : (
               <div className="nav-links">
-              {client ? (
+                {client ? (
                   <Link to={"/profile"}>
                     <p className="username">
                       {username ? username : "My account"}

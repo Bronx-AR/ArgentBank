@@ -23,13 +23,14 @@ const User = () => {
   const [updateUser] = useUpdateUserMutation();
   const { data: accounts } = useAccountsQuery({ userId });
 
-  console.log(accounts && accounts);
   console.log("accounts: ", accounts);
 
   const firstname = useSelector(selectCurrentFirstname);
   const lastname = useSelector(selectCurrentLastname);
   const username = useSelector(selectCurrentUsername);
 
+  const [updatedUsername, setUpdatedUsername] = useState();
+  const [toggle, setToggle] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -64,7 +65,7 @@ const User = () => {
               <input
                 type="text"
                 id="username"
-                defaultValue={updatedUsername ? updatedUsername : userName}
+                defaultValue={updatedUsername ? updatedUsername : username}
                 onChange={(e) => setUpdatedUsername(e.target.value)}
               />
             </div>
@@ -97,7 +98,7 @@ const User = () => {
       )}
 
       <div className="bankaccounts-container">
-      {accounts &&
+        {accounts &&
           accounts.map((acc) => (
             <BankAccount
               key={acc._id}

@@ -107,7 +107,7 @@ const BankAccount = ({ id, balance, accId }) => {
           <p className="account-balance">${balance}</p>
           <p className="account-subtitle">Available balance</p>
         </div>
-        <p className="chevron">{toggle ? "X" : ">"}</p>
+        <p className="chevron">{toggle ? "x" : ">"}</p>
       </article>
     </div>
   );

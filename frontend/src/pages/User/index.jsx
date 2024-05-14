@@ -14,18 +14,17 @@ import {
 } from "../../features/user/userApiSlice";
 import { setUserInfo } from "../../features/user/userSlice";
 import { useAccountsQuery } from "../../features/bank/bankApiSlice";
-import { setAccounts } from "../../features/bank/bankSlice";
+import { logOut } from "../../features/auth/authSlice";
 
 const User = () => {
   const userId = useSelector(selectCurrentId);
   const dispatch = useDispatch();
-  const [updatedUsername, setUpdatedUsername] = useState();
-  const [toggle, setToggle] = useState(false);
-  const { data: user } = useUserQuery();
-  const [updateUser, { isError }] = useUpdateUserMutation();
+  const { data: user, isError } = useUserQuery();
+  const [updateUser] = useUpdateUserMutation();
   const { data: accounts } = useAccountsQuery({ userId });
 
   console.log(accounts && accounts);
+  console.log("accounts: ", accounts);
 
   const firstname = useSelector(selectCurrentFirstname);
   const lastname = useSelector(selectCurrentLastname);
@@ -36,6 +35,7 @@ const User = () => {
     e.preventDefault();
     try {
       const result = await updateUser({ userName: updatedUsername }).unwrap();
+      dispatch(setUserInfo({ userName: username }));
       console.log(result);
       setToggle(!toggle);
     } catch (err) {

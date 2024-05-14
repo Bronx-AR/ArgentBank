@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { apiSlice } from "./api/apiSlice";
 import authReducer from "../features/auth/authSlice";
 import userReducer from "../features/user/userSlice";
-import bankerReducer from "../features/banker/bankerSlice";
+import bankerReducer from "../features/banker/bankerSlice.js";
 
 import {
   persistStore,

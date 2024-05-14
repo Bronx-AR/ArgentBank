@@ -1,24 +1,130 @@
-const Transaction = ({ transac, toggle }) => {
-    return toggle ? (
-      <div className="transaction-info">
-        <div className="item-type">
-          <p>Transaction type</p>
-          <p>Category</p>
-          <p>Note</p>
-        </div>
-        <div className="item-info">
+import { useState } from "react";
+import { useEditTransactionMutation } from "../../features/bank/bankApiSlice";
+import { selectCurrentRoles } from "../../features/auth/authSlice";
+import { useSelector } from "react-redux";
+
+const Transaction = ({ accId, transac, toggle }) => {
+  const [editTransaction] = useEditTransactionMutation();
+  const [noteToggle, setNoteToggle] = useState(false);
+  const [categoryToggle, setCategoryToggle] = useState(false);
+  const [editedNote, setEditedNote] = useState("");
+  const [editedCategory, setEditedCategory] = useState("");
+  const transacId = transac._id;
+
+  const roles = useSelector(selectCurrentRoles);
+  const rolesArray = Object.values(roles);
+  const client = rolesArray && rolesArray.includes(2502);
+
+  const handleEditNote = async (transactionId) => {
+    const editedContent = { note: editedNote ? editedNote : " " };
+    try {
+      const result = await editTransaction({
+        accId,
+        transactionId,
+        editedContent,
+      });
+      console.log(result);
+      setNoteToggle(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleEditCategory = async (transactionId) => {
+    const editedContent = { category: editedCategory ? editedCategory : " " };
+
+    try {
+      const result = await editTransaction({
+        accId,
+        transactionId,
+        editedContent,
+      });
+      console.log(result);
+      setCategoryToggle(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+ 
+
+  return toggle ? (
+    <div className="transaction-info">
+      <div className="item-type">
+        <p>Transaction type</p>
+        <p>Category</p>
+        <p>Note</p>
+      </div>
+      <div className="item-info">
+        <div>
           <p>{transac.transactionType}</p>
-          <p>
-            {transac.category}
-            <i className="fa-solid fa-pencil"></i>
-          </p>
-          <p>
-            {transac.note}
-            <i className="fa-solid fa-pencil"></i>
-          </p>
+        </div>
+        <div>
+          {!categoryToggle ? (
+            <p>
+              {editedCategory ? editedCategory : transac.category}
+              {client ? (
+                <i
+                  className="fa-solid fa-pencil"
+                  onClick={() => setCategoryToggle(!categoryToggle)}
+                ></i>
+              ) : null}
+            </p>
+          ) : (
+            <div className="edit-transac">
+              <input
+                className="edit-input"
+                type="text"
+                defaultValue={
+                  editedCategory ? editedCategory : transac.category
+                }
+                onChange={(e) => setEditedCategory(e.target.value)}
+              />
+              <i
+                className="fa-solid fa-xmark"
+                onClick={() => setCategoryToggle(!categoryToggle)}
+              ></i>
+              <i
+                className="fa-solid fa-check"
+                onClick={() => handleEditCategory(transacId)}
+              ></i>
+            </div>
+          )}
+        </div>
+        <div>
+          {!noteToggle ? (
+            <p>
+              {editedNote ? editedNote : transac.note}
+
+              {client ? (
+                <i
+                  className="fa-solid fa-pencil"
+                  onClick={() => setNoteToggle(!noteToggle)}
+                ></i>
+              ) : null}
+            </p>
+          ) : (
+            <div className="edit-transac">
+              <input
+                className="edit-input"
+                type="text"
+                defaultValue={editedNote ? editedNote : transac.note}
+                onChange={(e) => setEditedNote(e.target.value)}
+              />
+              <i
+                className="fa-solid fa-xmark"
+                onClick={() => setNoteToggle(!noteToggle)}
+              ></i>
+              <i
+                className="fa-solid fa-check"
+                onClick={() => handleEditNote(transacId)}
+              ></i>
+            </div>
+          )}
         </div>
       </div>
-    ) : null;
-  };
-  
-  export default Transaction;
+    </div>
+  ) : null;
+};
+
+export default Transaction;

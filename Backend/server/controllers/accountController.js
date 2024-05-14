@@ -42,6 +42,7 @@ const createTransaction = async (req, res) => {
     }
 
     const transaction = new Transaction({
+      accId,
       date,
       desc,
       amount,
@@ -85,7 +86,6 @@ const getTransactionsFromAccount = async (req, res) => {
     return res.status(400).json({ message: "No ID has been provided!" });
   }
 
-  console.log(req.params.accId);
   try {
     const account = await Account.findById(req.params.accId);
 
@@ -109,7 +109,7 @@ const updateTransaction = async (req, res) => {
     return res.status(400).json({ message: "No ID has been provided!" });
   }
 
-  if (!note && !category) {
+  if (!note || !category) {
     return res
       .status(400)
       .json({ message: "No Category or Note has been provided!" });

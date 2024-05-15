@@ -16,9 +16,9 @@ const PORT = process.env.PORT || 3520;
 dbConnection();
 
 // Handle CORS issues
-//"https://argent-bank-mzi.netlify.app",
+//"https://argent-bank.netlify.app",
 const corsOptions = {
-  origin: "https://argent-bank-mzi.netlify.app",
+  origin: "https://argent-bank.netlify.app",
   credentials: true,
 };
 app.use(cors(corsOptions));

@@ -1,63 +1,58 @@
-.main-signin {
-  height: 83.9vh;
-  margin: auto 0;
-  background-color: #12002b;
+.main {
+  flex: 1;
 }
-.signin {
-  width: 100%;
-  height: 100%;
+
+.bg-dark {
+ background-color: #12002b;
+  min-height: calc(100vh - 143px);
+  padding: 1px 0;
+}
+
+.sign-in-button {
+display: block;
+width: 100%;
+padding: 8px;
+font-size: 1.1rem;
+font-weight: bold;
+margin-top: 1rem;
+border-color: #00bc77;
+background-color: #00bc77;
+color: #fff;
+}
+
+.sign-in-content {
+box-sizing: border-box;
+background-color: white;
+width: 300px;
+margin: 0 auto;
+margin-top: 3rem;
+padding: 2rem;
+}
+
+.sign-in-icon {
+  font-size: 5rem;
+}
+
+.input-remember {
   display: flex;
-  justify-content: center;
-  &-form {
-    display: flex;
-    flex-direction: column;
-    background-color: #fff;
-    margin-top: 50px;
-    width: 300px;
-    height: 350px;
-    padding: 32px;
-    .form-header {
-      text-align: center;
-      h2 {
-        margin: 15px 0px;
-      }
-    }
+}
 
-    label[for="username"],
-    label[for="password"] {
-      font-weight: 700;
-    }
-    input[type="text"],
-    input[type="password"] {
-      padding: 5px;
-      margin-bottom: 10px;
-    }
-    .saveLogins-container {
-      display: flex;
-      flex-direction: row-reverse;
-      justify-content: flex-end;
-      margin-bottom: 20px;
-      label {
-        margin-left: 10px;
-      }
-    }
+.input-remember label {
+  margin-left: 0.25rem;
+}
 
-    .signin-button {
-      display: block;
-      width: 100%;
-      padding: 8px;
-      font-size: 1.1rem;
-      font-weight: bold;
-      margin-top: 1rem;
-      border: none;
-      background-color: #00bc77;
-      color: #fff;
-    }
-    .error {
-      height: 10px;
-      font-size: 10px;
-      color: #00bc77;
-      text-align: center;
-    }
-  }
+.input-wrapper {
+display: flex;
+flex-direction: column;
+text-align: left;
+margin-bottom: 1rem;
+}
+
+.input-wrapper label {
+  font-weight: bold;
+}
+
+.input-wrapper input {
+padding: 5px;
+font-size: 1.2rem;
 }

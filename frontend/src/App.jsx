@@ -1,41 +1,25 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Header from "./components/Header/Header";
-import Home from "./pages/Home";
-import Signin from "./pages/SignIn";
-import User from "./pages/User";
-import "./styles/index.scss";
-import Footer from "./components/Footer/Footer";
-import PrivateRoute from "./components/PrivateRoutes/PrivateRoute";
-import Dashboard from "./pages/Banker/Dashboard";
-import Client from "./pages/Banker/Client";
+import { Routes, Route, Navigate } from "react-router-dom"
+import { useSelector } from "react-redux"
+import Header from "./components/Header/Header"
+import Footer from "./components/Footer/Footer"
+import Home from "./pages/Home/index"
+import SignIn from "./pages/SignIn/index"
+import User from "./pages/User/index"
+import SignUp from "./pages/SignUp/index"
 
-function App() {
-  return (
-    <>
-      <BrowserRouter>
-        <div className="container">
-          <Header />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="*" element={<Home />} />
-            <Route path="/login" element={<Signin />} />
-
-            {/* User */}
-            <Route element={<PrivateRoute role={2502} />}>
-              <Route path="/profile" element={<User />} />
-            </Route>
-
-            {/* Banker */}
-            <Route element={<PrivateRoute role={1406} />}>
-              <Route path="/panel/banker" element={<Dashboard />} />
-              <Route path="/panel/banker/users/:id" element={<Client />} />
-            </Route>
-          </Routes>
-          <Footer />
-        </div>
-      </BrowserRouter>
-    </>
-  );
+export default function App() {
+	const token = useSelector(state => state.userAuth.token)
+  	return (
+		<div>
+			<Header />
+			<Routes>
+				<Route path="/" element={<Home />} />
+				<Route path="/sign-in" element={<SignIn />} />
+				<Route path="/user" element={token ? <User /> : <Navigate to="/sign-in" />} />
+				<Route path="/sign-up" element={<SignUp />} />
+				<Route path="*" element={<Home />} />
+			</Routes>
+			<Footer />
+	 	</div>
+  	)
 }
-
-export default App;

@@ -1,84 +1,24 @@
-.hero {
-  overflow: hidden;
-  &-banner {
-    position: relative;
-    background-image: url("../../assets/Arbre bancaire.webp");
-    background-position: 0% 33%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 400px;
-    .hero-content {
-      position: absolute;
-      top: 80px;
-      right: 80px;
-      background-color: #fff;
-      width: 365px;
-      height: 215px;
-      padding: 35px;
-      h2 {
-        margin-bottom: 22px;
-        font-size: 22px;
-        font-weight: 800;
-        letter-spacing: 1.5px;
-      }
-      p {
-        font-size: 20px;
-      }
-    }
-  }
+.sr-only {
+	border: 0 !important;
+	clip: rect(1px, 1px, 1px, 1px) !important; /* 1 */
+	-webkit-clip-path: inset(50%) !important;
+	clip-path: inset(50%) !important; /* 2 */
+	height: 1px !important;
+	margin: -1px !important;
+	overflow: hidden !important;
+	padding: 0 !important;
+	position: absolute !important;
+	width: 1px !important;
+	white-space: nowrap !important; /* 3 */
 }
 
-.services {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 40px 45px;
-  height: 310px;
-  margin-bottom: 30px;
-  &-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 15px;
-    width: 33.33%;
-    .img-container {
-      border: 10px solid $primary;
-      border-radius: 50%;
-      padding: 15px;
-
-      img {
-        width: 100px;
-      }
-    }
-    .services-title {
-      font-size: 20px;
-    }
-    .services-subtitle {
-      text-align: center;
-    }
-  }
+.features {
+	display: flex;
+	flex-direction: column;
 }
 
-@media screen and (max-width: 678px) {
-  .hero-banner {
-    display: grid;
-    place-content: center;
-    padding: 0px 20px;
-    .hero-content {
-      position: static;
-      width: 100%;
-    }
-  }
-
-  .services {
-    height: 100%;
-    width: 100%;
-    flex-direction: column;
-    &-card {
-      text-align: center;
-      margin: 20px 0px;
-      width: 100%;
-    }
-  }
+@media (min-width: 920px) {
+	.features {
+		flex-direction: row;
+	}
 }

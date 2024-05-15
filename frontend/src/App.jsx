@@ -5,7 +5,6 @@ import Footer from "./components/Footer/Footer"
 import Home from "./pages/Home/index"
 import SignIn from "./pages/SignIn/index"
 import User from "./pages/User/index"
-import SignUp from "./pages/SignUp/index"
 
 export default function App() {
 	const token = useSelector(state => state.userAuth.token)
@@ -16,7 +15,6 @@ export default function App() {
 				<Route path="/" element={<Home />} />
 				<Route path="/sign-in" element={<SignIn />} />
 				<Route path="/user" element={token ? <User /> : <Navigate to="/sign-in" />} />
-				<Route path="/sign-up" element={<SignUp />} />
 				<Route path="*" element={<Home />} />
 			</Routes>
 			<Footer />

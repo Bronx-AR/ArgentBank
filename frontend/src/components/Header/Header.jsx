@@ -41,13 +41,6 @@ export default function Header() {
                         <i className="fa fa-user-circle"></i>
                         {token ? " Sign Out" : " Sign In"}
                     </Link>
-                    {!token && (
-                        <Link
-                            className="main-nav-item"
-                            to="./sign-up">
-                            Sign Up
-                        </Link>
-                    )}
                 </div>
             </nav>
         </header>

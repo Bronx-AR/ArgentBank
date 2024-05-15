@@ -5,7 +5,6 @@ const tokenValidation = require("../middleware/tokenValidation");
 const verifyRoles = require("../middleware/rolesValidation");
 const rolesList = require("../config/rolesList");
 
-
 router.get(
   "/getUsers",
   tokenValidation.validateToken,
@@ -15,13 +14,11 @@ router.get(
 
 router.post("/signup", userController.createUser);
 router.post("/login", userController.loginUser);
-
 router.post(
   "/profile",
   tokenValidation.validateToken,
   userController.getUserProfile
 );
-
 router.put(
   "/profile",
   tokenValidation.validateToken,

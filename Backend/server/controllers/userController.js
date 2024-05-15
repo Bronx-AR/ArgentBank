@@ -100,9 +100,11 @@ const getUserProfile = async (req, res) => {
     const decodedJwtToken = jwt.decode(jwtToken);
     console.log(decodedJwtToken);
     const user = await User.findOne({ _id: decodedJwtToken.UserInfo.id });
+
     if (!user) {
       res.status(404).json({ message: "User not found!" });
     }
+
     return res.status(200).json(user);
   } catch (error) {
     console.error("Error in userService.js", error);
@@ -126,9 +128,11 @@ const updateUserProfile = async (req, res) => {
       },
       { new: true }
     );
+
     if (!user) {
       return res.status(404).json({ message: "User not found!" });
     }
+
     return res.status(200).json({ user });
   } catch (error) {
     console.error("Error in userService.js", error);

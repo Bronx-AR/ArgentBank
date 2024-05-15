@@ -22,7 +22,6 @@ const getTransactionsFromAccount = async (req, res) => {
   if (!req.params.accId) {
     return res.status(400).json({ message: "No ID has been provided!" });
   }
-
   try {
     const account = await Account.findById(req.params.accId);
 
@@ -62,14 +61,14 @@ const updateTransaction = async (req, res) => {
 
     await account.populate("transactions").execPopulate();
     const transaction = account.transactions.find(
-        (transac) => transac._id == transacId
+      (transac) => transac._id == transacId
     );
 
     console.log(transaction);
     if (!transaction) {
       return res.status(404).json({ message: "No transaction found!" });
     }
-    
+
     if (note) {
       transaction.note = note;
     }

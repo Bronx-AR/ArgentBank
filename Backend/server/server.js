@@ -29,19 +29,19 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Handle custom routes
+// Handle custom routesd
 app.use("/api/v1/refresh", require("./routes/refreshRoutes"));
 app.use("/api/v1/user", require("./routes/userRoutes"));
 app.use("/api/v1/bank", require("./routes/accountRoutes"));
 app.use("/api/v1/panel", require("./routes/bankerRoutes"));
 
 // API Documentation
-if (process.env.NODE_ENV !== 'production') {
-  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
-};
+if (process.env.NODE_ENV !== "production") {
+  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+}
 
-app.get('/', (req, res, next) => {
-  res.send('Hello from my Express server v2!')
+app.get("/", (req, res, next) => {
+  res.send("Hello from my Express server v2!");
 });
 
 app.listen(PORT, () => {

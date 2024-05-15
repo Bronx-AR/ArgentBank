@@ -6,31 +6,31 @@ const verifyRoles = require("../middleware/rolesValidation");
 const rolesList = require("../config/rolesList");
 
 router.get(
-    "/users",
-    tokenValidation.validateToken,
-    verifyRoles(rolesList.Banker),
-    bankerController.getAllUsers
+  "/users",
+  tokenValidation.validateToken,
+  verifyRoles(rolesList.Banker),
+  bankerController.getAllUsers
 );
 
 router.get(
-    "/users/:id",
-    tokenValidation.validateToken,
-    verifyRoles(rolesList.Banker),
-    bankerController.getUser
+  "/users/:id",
+  tokenValidation.validateToken,
+  verifyRoles(rolesList.Banker),
+  bankerController.getUser
 );
 
 router.post(
-    "/banker/addAccount",
-    tokenValidation.validateToken,
-    verifyRoles(rolesList.Banker),
-    bankerController.createAccount
+  "/banker/addAccount",
+  tokenValidation.validateToken,
+  verifyRoles(rolesList.Banker),
+  bankerController.createAccount
 );
 
 router.post(
-    "/banker/addTransaction",
-    tokenValidation.validateToken,
-    verifyRoles(rolesList.Banker),
-    bankerController.createTransaction
+  "/banker/addTransaction",
+  tokenValidation.validateToken,
+  verifyRoles(rolesList.Banker),
+  bankerController.createTransaction
 );
 
 module.exports = router;

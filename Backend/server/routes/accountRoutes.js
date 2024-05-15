@@ -5,6 +5,8 @@ const accountController = require("../controllers/accountController");
 const verifyRoles = require("../middleware/rolesValidation");
 const rolesList = require("../config/rolesList");
 
+
+
 router.post(
   "/accounts",
   tokenValidation.validateToken,

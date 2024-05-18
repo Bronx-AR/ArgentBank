@@ -1,13 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit"
 
+// Définition de l'état initial en dehors de createSlice
+const initialState = {
+    email: "",
+    firstName: "",
+    lastName: "",
+    userName: "",
+};
+
 const profileSlice = createSlice({
     name: "profile",
-    initialState: {
-        email: "",
-        firstName: "",
-        lastName: "",
-        userName: "",
-    },
+    initialState,
     reducers: {
         setGetProfile: (state, action) => {
             state.email = action.payload.data.body.email;

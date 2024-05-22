@@ -9,6 +9,7 @@ export default function SignIn() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [checkBox, setCheckBox] = useState(false)
+    const [error, setError] = useState(null)
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -27,6 +28,7 @@ export default function SignIn() {
             navigate("/user")
         } catch (err) {
             console.log(err)
+            setError("Email or Password invalid")
         }
     }
 
@@ -38,8 +40,8 @@ export default function SignIn() {
                 <form onSubmit={fetchLogIn}>
                     <TextInput
                         className="input-wrapper"
-                        label="Username"
-                        id="username"
+                        label="Email"
+                        id="email"
                         type="text"
                         autoComplete="email"
                         onChange={(e) => setEmail(e.target.value)} />
@@ -56,6 +58,7 @@ export default function SignIn() {
                         id="remember-me"
                         type="checkbox"
                         onChange={() => setCheckBox(!checkBox)} />
+                    {error && <p className="error-message">{error}</p>}
                     <Button
                         className="sign-in-button"
                         type="submit">

@@ -59,25 +59,10 @@ export default function EditButton() {
                         value={newUserName} />
                     {error && <p className="error-message">{error}</p>}
                     <br />
-                    <TextInput
-                        label="Firstname"
-                        id="firstname"
-                        type="text"
-                        autoComplete="firstname" />
-                    <TextInput
-                        label="Lastname"
-                        id="lastname"
-                        type="text"
-                        autoComplete="lastname" />
                     <Button
                         className="edit-button"
                         onClick={editUserName}>
                         Save
-                    </Button>
-                    <Button
-                        className="edit-button"
-                        onClick={editUserName}>
-                        Cancel
                     </Button>
                 </div>
             ) : (

@@ -5,11 +5,26 @@ import TextInput from "../TextInput/TextInput"
 import Button from "../Button/Button"
 
 export default function EditButton() {
+    const userFirstName = useSelector(state => state.userAuth.firstname)
+    const userLastName = useSelector(state => state.userAuth.lastname)
     const token = useSelector(state => state.userAuth.token)
     const profile = useSelector((state) => state.profile)
+    const [isActive, setIsActive] = useState(false)
+    const [titleText, setTitleText] = useState('Welcome back')
+    const [point, setPoint] = useState('!')
     const [isEditing, setIsEditing] = useState(false)
     const [newUserName, setNewUserName] = useState(profile.userName)
+    const [firstname, setFirstName] = useState(userFirstName)
+    const [lastname, setLastName] = useState(userLastName)
     const [error, setError] = useState("")
+
+    const reverseClick = () => {
+        setIsActive(current => !current);
+        setTitleText('Welcome back');
+        setFirstName(userFirstName);
+        setLastName(userLastName);
+        setPoint('!')
+    }
 
     const dispatch = useDispatch()
 
@@ -59,11 +74,31 @@ export default function EditButton() {
                         value={newUserName} />
                     {error && <p className="error-message">{error}</p>}
                     <br />
+                    <TextInput
+                        label="Firstname"
+                        id="firstname"
+                        type="text"
+                        value={userFirstName}
+                        onChange={(e) => e.preventDefault()} disabled />
+                    <TextInput
+                        label="Lastname"
+                        id="lastname"
+                        type="text"
+                        value={userLastName}
+                        onChange={(e) => e.preventDefault()} disabled />
                     <Button
                         className="edit-button"
                         onClick={editUserName}>
                         Save
                     </Button>
+                    <Button
+                        className="edit-button"
+                        onClick={(e) => {
+                            e.preventDefault()
+                            dispatch(reverseClick)
+                        }}>
+                            Cancel
+                        </Button>
                 </div>
             ) : (
                 <Button

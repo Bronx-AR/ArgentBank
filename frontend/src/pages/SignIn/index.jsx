@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { setLogIn } from "../../redux/reducers/userAuthSlice"
@@ -14,6 +14,14 @@ export default function SignIn() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
+    useEffect(() => {
+        const token = localStorage.getItem("token") || sessionStorage.getItem("token")
+        if (token) {
+            dispatch(setLogIn({ token }))
+            navigate("/user")
+        }
+    }, [dispatch, navigate])
+
     const fetchLogIn = async (e) => {
         e.preventDefault()
         try {
@@ -24,6 +32,11 @@ export default function SignIn() {
             })
             const data = await response.json()
             const token = data.body.token
+            if (checkBox) {
+                localStorage.setItem("token", token)
+            } else {
+                sessionStorage.setItem("token", token)
+            }
             dispatch(setLogIn({ token }))
             navigate("/user")
         } catch (err) {

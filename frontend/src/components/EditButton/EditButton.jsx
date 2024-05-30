@@ -14,14 +14,14 @@ export default function EditButton() {
     const dispatch = useDispatch()
 
     useEffect(() => {
-    setNewUserName(profile.userName)
+        setNewUserName(profile.userName)
     }, [profile.userName])
     
     const editUserName = async (e) => {
         e.preventDefault()
         if (!newUserName) {
             setError("The field cannot be empty.")
-        return
+            return
         }
         try {
             const response = await fetch("http://localhost:3001/api/v1/user/profile", {
@@ -32,7 +32,7 @@ export default function EditButton() {
                 },
                 body: JSON.stringify({ userName: newUserName })
             })
-            if (!response) {
+            if (!response.ok) {
                 throw new Error("Échec de la mise à jour du nom d'utilisateur")
             }
             dispatch(setEditProfile(newUserName))
@@ -40,6 +40,11 @@ export default function EditButton() {
         } catch (err) {
             console.log(err)
         }
+    }
+
+    const cancelEdit = () => {
+        setNewUserName(profile.userName)
+        setIsEditing(false)
     }
 
     return (
@@ -54,22 +59,42 @@ export default function EditButton() {
                         onChange={(e) => {
                             setNewUserName(e.target.value)
                             setError("")
-
                         }}
                         value={newUserName} />
                     {error && <p className="error-message">{error}</p>}
                     <br />
+                    <TextInput
+                        label="First Name"
+                        id="first-name"
+                        type="text"
+                        value={profile.firstName}
+                        readOnly
+                        className="grayed-out-input"
+                    />
+                    <TextInput
+                        label="Last Name"
+                        id="last-name"
+                        type="text"
+                        value={profile.lastName}
+                        readOnly
+                        className="grayed-out-input"
+                    />
                     <Button
                         className="edit-button"
                         onClick={editUserName}>
                         Save
+                    </Button>
+                    <Button
+                        className="edit-button"
+                        onClick={cancelEdit}>
+                        Cancel
                     </Button>
                 </div>
             ) : (
                 <Button
                     className="edit-button"
                     onClick={() => setIsEditing(true)}>
-                    Edit UserName
+                    Edit Name
                 </Button>
             )}
         </div>

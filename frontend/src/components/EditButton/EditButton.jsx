@@ -48,9 +48,9 @@ export default function EditButton() {
     }
 
     return (
-        <div>
+        <div className="edit-form">
             {isEditing ? (
-                <div>
+                <div className="edit-items">
                     <TextInput
                         label="Username"
                         id="username"

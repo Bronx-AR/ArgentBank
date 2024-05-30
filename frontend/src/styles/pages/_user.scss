@@ -1,16 +1,21 @@
-.main {
-    flex: 1;
+.user-page{
+  background-color: #12002b;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-bottom: 50px;
+  min-height: 100vh;
 }
 
-.bg-dark {
-   background-color: #12002b;
-  min-height: calc(100vh - 143px);
-  padding: 1px 0;
-}
-
-.header {
+.user-welcome-content{
+  margin-top: 25px;
   color: #fff;
-  margin-bottom: 2rem;
+  text-align: center;
+  .welcome-title{
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
 }
 
 .sr-only {

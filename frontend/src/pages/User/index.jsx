@@ -30,8 +30,8 @@ export default function User() {
 
     return (
 
-        <main className="main bg-dark">
-            <div className="header">
+        <main className="user-page">
+            <div className="user-welcome-content">
                 <h1>Welcome back<br />{profile.firstName + " " + profile.lastName + "!"}</h1>
                 <EditButton />
             </div>

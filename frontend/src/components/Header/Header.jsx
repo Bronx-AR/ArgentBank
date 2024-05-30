@@ -22,25 +22,26 @@ export default function Header() {
                     <h1 className="sr-only">Argent Bank</h1>
                 </Link>
                 <div>
-                    {token && (
+                    <i className="fa fa-user-circle"></i>
+                        {token && (
+                            <Link
+                                className="main-nav-item"
+                                to="./user">
+                                {profile.userName}
+                            </Link>
+                        )}
                         <Link
                             className="main-nav-item"
-                            to="./user">
-                            {profile.userName}
+                            to={token ? "./" : "./sign-in/"}
+                            onClick={() => {
+                                if (token) {
+                                    dispatch(setLogOut({}))
+                                    dispatch(resetProfile())
+                                }
+                            }}>
+                            <i className="fa fa-sign-out"></i>
+                            {token ? " Sign Out" : " Sign In"}
                         </Link>
-                    )}
-                    <Link
-                        className="main-nav-item"
-                        to={token ? "./" : "./sign-in/"}
-                        onClick={() => {
-                            if (token) {
-                                dispatch(setLogOut({}))
-                                dispatch(resetProfile())
-                            }
-                        }}>
-                        <i className="fa fa-user-circle"></i>
-                        {token ? " Sign Out" : " Sign In"}
-                    </Link>
                 </div>
             </nav>
         </header>

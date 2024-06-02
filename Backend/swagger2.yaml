@@ -9,375 +9,185 @@ basePath: /api/v1
 schemes:
   - http
 paths:
-  /bank/accounts:
+  /user/accounts:
     get:
       security:
         - Bearer: []
       tags:
-        - Bank (Client)
-        - Bank (Banker)
-        - Bank (Admin)
-      summary: Get accounts
-      description: get all accounts available
+        - User Module
+      summary: User's Accounts API
+      description: API for getting user's accounts
       responses:
         '200':
-          description: Login Successfully
+          description: User's accounts retrieved successfully
           schema:
-            $ref: '#/definitions/Accounts'
+            $ref: '#/definitions/UserAccount'
         '400':
           description: Invalid Fields
-        '401':
-          description : Unauthorized
         '500':
           description: Internal Server Error
-  /bank/accounts/{account_id}/transactions:
+  /user/accounts/{accountId}/transactions:
     get:
       security:
         - Bearer: []
       tags:
-        - Bank (Client)
-        - Bank (Banker)
-        - Bank (Admin)
-      summary: Get account transactions by Account Id
-      description: Get account transactions by Account Id
+        - User Module
+      summary: Account Transactions API
+      description: API for getting accounts's transactions
       parameters:
         - in: path
-          name: account_id
-          description: account id
+          name: accountId
+          description: User's account ID
+          type: integer
           required: true
-          type: string
-      produces:
-        - application/json
       responses:
         '200':
-          description: Successfully get the account
+          description: Account's transactions retrieved successfully
           schema:
-            $ref: '#/definitions/Transactions'
+            $ref: '#/definitions/AccountTransactions'
         '400':
           description: Invalid Fields
-        '401':
-          description : Unauthorized  
         '500':
           description: Internal Server Error
-  /bank/accounts/{account_id}/transactions/{transaction_id}:
+  /user/transactions/{transactionId}/Category:
     put:
       security:
         - Bearer: []
       tags:
-        - Bank (Client)
-      summary: Update transaction by Id
-      description: Update a transaction note or/and category using its Id.
+        - User Module
+      summary: Account Transactions API
+      description: API for updating transaction's category
       parameters:
-        - in: path
-          name: account_id
-          description: account id
-          required: true
-          type: string
-        - in: path
-          name: transaction_id
-          description: Update transaction note and category 
-          required: true
-          type: string
         - in: body
           name: body
-          description: Update transaction note and category 
+          description: Update transaction details
           required: true
           schema:
-            $ref: '#/definitions/UpdateTransaction'
+            $ref: '#/definitions/UpdateTransactionDetailsCategory'
+        - in: path
+          name: transactionId
+          description: Account's transaction ID
+          type: integer
+          required: true
       produces:
         - application/json
       responses:
         '200':
-          description: Transaction updated successully
+          description: User profile retrieved successully
           schema:
-            $ref: '#/definitions/Transaction'
-        '404':
-          description: Not found
-        '401':
-          description : Unauthorized  
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Invalid Fields
         '500':
           description: Internal Server Error
-          
-          
-          
-  /panel/users:
-    get:
-      security:
-        - Bearer: []
-      tags:
-        - Bank (Banker)
-        - Bank (Admin)
-      summary: Get all Clients from the Bank
-      description: Get all Clients from the bank to add transactions or accounts
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: Clients fetched successfully
-        '401': 
-          description: Unauthorized
-        '404':
-          description: Clients not found
-        '500':
-          description: Internal Server Error
-          
-  /panel/users/{userId}:
-    get:
-      security:
-        - Bearer: []
-      tags:
-        - Bank (Banker)
-        - Bank (Admin)
-      summary: Get a Client by his Id
-      description: Get a client by his Id to update or delete him.
-      produces:
-        - application/json
-      parameters:
-        - in: path
-          name: userId
-          description: Client Id
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Client retrieved successfully
-        '400':
-          description: Client Id required!
-        '404':
-          description: No user found!
-        '500':
-          description: Error Server
-                  
-          
-  /panel/banker/addAccount:
-    post: 
-      security:
-        - Bearer: []
-      tags: 
-        - Bank (Banker)
-      summary: Add an account
-      description: Add an account linked to an existing Client.
-      produces: 
-        - application/json
-      parameters:
-        - in: body
-          name: body
-          description: Add an account with a userId (Client ID) and the initial balance.
-          required: true
-          schema:
-            $ref: '#/definitions/addAccount'
-      responses:
-        '201':
-          description: Account created successfully!
-        '400':
-          description: All fields are required
-        '500':
-          description: Error creating account
-  
-  
-  /panel/banker/addTransaction:
-    post:
-      security:
-        - Bearer: []
-      tags: 
-        - Bank (Banker)
-      summary: Add transaction to an existing account
-      description: Add a transaction to an account linked to a client
-      produces: 
-        - application/json  
-      parameters:
-        - in: body
-          name: body
-          description: Add a transaction with accId, desc, amount, balance.
-          required: true
-          schema:
-            $ref: '#/definitions/addTransaction'
-      responses:
-        '201': 
-          description: Transaction created sucessfully
-        '400':
-          description: All fields are required
-        '404':
-          description: No account found with this ID
-        '500': 
-          description: Error creating the transaction
-        
-  /panel/admin/deleteAccount/{accountID}:
-    delete:
-      security:
-        - Bearer: []
-      tags:
-        - Bank (Admin)
-      summary: Delete an account
-      description: Delete an account
-      produces:
-        - application/json
-      parameters:
-        - in: path
-          name: accountID
-          type: string
-          required: true
-      responses:
-        '200':
-          description: Account deleted successfully
-        '400': 
-          description: All fields are required
-        '500':
-          description: Error deleting the account
- 
-          
-  /panel/admin/deleteTransaction/{transactionID}:
-    delete:
-      security:
-        - Bearer: []
-      tags:
-        - Bank (Admin)
-      summary: Delete a transaction
-      description: Delete a transaction
-      produces:
-        - application/json
-      parameters:
-        - in: path
-          name: transactionID
-          type: string
-          required: true
-      responses:
-        '200':
-          description: Transaction deleted successfully
-        '400': 
-          description: All fields are required
-        '500':
-          description: Error deleting the transaction
-          
-          
-  /panel/admin/upUser/{userID}:
+  /user/transactions/{transactionId}/Note:
     put:
       security:
         - Bearer: []
       tags:
-        - Bank (Admin)
-      summary: Update Client infos
-      description: Update any information of a Client
-      produces: 
-        - application/json
+        - User Module
+      summary: Account Transactions API
+      description: API for updating transaction's note
       parameters:
-        - in: path
-          name: userID
-          type: string
-          required: true
         - in: body
           name: body
+          description: Update transaction details
           required: true
           schema:
-            $ref: '#/definitions/updateClient'
+            $ref: '#/definitions/UpdateTransactionDetailsNote'
+        - in: path
+          name: transactionId
+          description: Account's transaction ID
+          type: integer
+          required: true
+      produces:
+        - application/json
       responses:
         '200':
-          description: Client updated sucessfully
+          description: User profile retrieved successully
+          schema:
+            $ref: '#/definitions/ApiResponse'
         '400':
-          description: All fields are required
+          description: Invalid Fields
         '500':
-          description: Error updating the Client
-          
-          
+          description: Internal Server Error
 securityDefinitions:
   Bearer:
     type: apiKey
     name: Authorization
     in: header
 definitions:
-  addAccount:
+  ApiResponse:
+    type: object
     properties:
-      user:
+      status:
+        type: integer
+      message:
         type: string
-        description: Client ID
-      availableBalance:
-        type: number
-        description: Available balance on the account
-  Accounts:
-    properties:
-      accountId:
-        type: string
-        description: account id
-      availableBalance:
-        type: string
-        description: available balance on the account
-  addTransaction:
-    properties:
-      accId:
-        type: string
-        description: Account Id to linked the transaction to it
-      desc: 
-        type: string
-        description: Description of the transaction
-      amount:
-        type: number
-        description: Amount of the transaction
-      balance: 
-        type: number
-        description: balance left after transaction
-      note:
-        type: string
-      category:
-        type: string
-  Transactions:
-    properties:
-      transactions:
-        properties:
-          date:
-            type: string
-            description: Transaction date
-          description:
-            type: string
-            description: Transaction description
-          amount:
-            type: number
-            description: Transaction amount
-          balance:
-            type: string
-            description: balance  
-          transactionType:
-            type: string
-            description: What kind of transaction
-          note: 
-            type: string
-            description: note to describe the transaction
-          category:
-            type: string
-            description: transaction's category
-  Transaction:
-    properties:
-      date:
-        type: string
-        description: Transaction date
-      description:
-        type: string
-        description: Transaction description
-      amount:
-        type: number
-        description: Transaction amount
-      balance:
-        type: string
-        description: balance    
-      transactionType:
-        type: string
-        description: What kind of transaction
-      note: 
-        type: string
-        description: note to describe the transaction
-      category:
-        type: string
-        description: transaction's category 
-  updateClient:
-    properties:
-      email:
-        type: string
-      lastname:
-        type: string
-      roles:
+      body:
         type: object
-  UpdateTransaction:
+        properties:
+          id:
+            type: string
+          email:
+            type: string
+  UserAccount:
+    type: object
     properties:
-      note: 
+      status:
+        type: integer
+      message:
         type: string
-      category: 
+      body:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+             type: string
+            balance: 
+              type: string
+            category:
+              type: string
+  AccountTransactions:
+    type: object
+    properties:
+      status:
+        type: integer
+      message:
+        type: string
+      body:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+            month:
+              type: string
+            date:
+              type: string
+            description: 
+              type: string
+            amount:
+              type: string
+            balance:
+              type: string
+            type:
+              type: string
+            category:
+              type: string
+            note:
+              type: string
+  UpdateTransactionDetailsCategory:
+    type: object
+    properties:
+      category:
+        type: string
+  UpdateTransactionDetailsNote:
+    type: object
+    properties:
+      note:
         type: string

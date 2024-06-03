@@ -15,12 +15,14 @@ export default function SignIn() {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        const token = localStorage.getItem("token") || sessionStorage.getItem("token")
-        if (token) {
-            dispatch(setLogIn({ token }))
-            navigate("/user")
+        const storedEmail = localStorage.getItem("email")
+        const storedPassword = localStorage.getItem("password")
+        if (storedEmail && storedPassword) {
+            setEmail(storedEmail)
+            setPassword(storedPassword)
+            setCheckBox(true)
         }
-    }, [dispatch, navigate])
+    }, [])
 
     const fetchLogIn = async (e) => {
         e.preventDefault()
@@ -32,16 +34,31 @@ export default function SignIn() {
             })
             const data = await response.json()
             const token = data.body.token
-            if (checkBox) {
-                localStorage.setItem("token", token)
-            } else {
-                sessionStorage.setItem("token", token)
-            }
             dispatch(setLogIn({ token }))
+            
+            if (checkBox) {
+                localStorage.setItem("email", email)
+                localStorage.setItem("password", password)
+            } else {
+                localStorage.removeItem("email")
+                localStorage.removeItem("password")
+            }
+            
             navigate("/user")
         } catch (err) {
             console.log(err)
             setError("Email or Password invalid")
+        }
+    }
+
+    const handleCheckBoxChange = () => {
+        setCheckBox(!checkBox)
+        if (!checkBox) {
+            localStorage.setItem("email", email)
+            localStorage.setItem("password", password)
+        } else {
+            localStorage.removeItem("email")
+            localStorage.removeItem("password")
         }
     }
 
@@ -57,6 +74,7 @@ export default function SignIn() {
                         id="email"
                         type="text"
                         autoComplete="email"
+                        value={email}
                         onChange={(e) => setEmail(e.target.value)} />
                     <TextInput
                         className="input-wrapper"
@@ -64,13 +82,15 @@ export default function SignIn() {
                         id="password"
                         type="password"
                         autoComplete="current-password"
+                        value={password}
                         onChange={(e) => setPassword(e.target.value)} />
                     <TextInput
                         className="input-remember"
                         label="Remember me"
                         id="remember-me"
                         type="checkbox"
-                        onChange={() => setCheckBox(!checkBox)} />
+                        checked={checkBox}
+                        onChange={handleCheckBoxChange} />
                     {error && <p className="error-message">{error}</p>}
                     <Button
                         className="sign-in-button"

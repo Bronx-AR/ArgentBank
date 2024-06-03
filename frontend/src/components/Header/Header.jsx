@@ -9,12 +9,17 @@ export default function Header() {
     const profile = useSelector((state) => state.profile)
     const dispatch = useDispatch()
 
+    const handleSignOut = () => {
+        dispatch(setLogOut())
+        dispatch(resetProfile())
+    }
+
     return (
         <header>
             <nav className="main-nav">
                 <Link
                     className="main-nav-logo"
-                    to="./" >
+                    to="./">
                     <img
                         className="main-nav-logo-image"
                         src={logo}
@@ -23,25 +28,28 @@ export default function Header() {
                 </Link>
                 <div>
                     <i className="fa fa-user-circle"></i>
-                        {token && (
+                    {token ? (
+                        <>
                             <Link
                                 className="main-nav-item"
                                 to="./user">
                                 {profile.userName}
                             </Link>
-                        )}
+                            <Link
+                                className="main-nav-item"
+                                to="./"
+                                onClick={handleSignOut}>
+                                <i className="fa fa-sign-out"></i>
+                                Sign Out
+                            </Link>
+                        </>
+                    ) : (
                         <Link
                             className="main-nav-item"
-                            to={token ? "./" : "./sign-in/"}
-                            onClick={() => {
-                                if (token) {
-                                    dispatch(setLogOut({}))
-                                    dispatch(resetProfile())
-                                }
-                            }}>
-                            <i className="fa fa-sign-out"></i>
-                            {token ? " Sign Out" : " Sign In"}
+                            to="./sign-in/">
+                            Sign In
                         </Link>
+                    )}
                 </div>
             </nav>
         </header>
